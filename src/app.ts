@@ -35,11 +35,11 @@ class App {
   }
 
   private async database(): Promise<void> {
-    try {
-      await createConnection()
-    } catch (err) {
-      console.debug(err.stack)
-    }
+    // try {
+    //   await createConnection()
+    // } catch (err) {
+    //   console.debug(err.stack)
+    // }
   }
 
   private routes(): void {
