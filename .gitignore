@@ -1,0 +1,9 @@
+.env
+
+node_modules/
+temp/
+dist/
+
+yarn-error.log
+.scannerwork/
+

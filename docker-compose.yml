@@ -1,0 +1,33 @@
+version: '3'
+networks:
+  database:
+  queue:
+services:
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - ./src/db/scripts:/scripts
+      - ./src/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - '5432:5432'
+    networks:
+      - database
+  app:
+    image: node:14
+    working_dir: /usr/app
+    command: bash -c "yarn && yarn run dev"
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+    networks:
+      - database
+      - queue
