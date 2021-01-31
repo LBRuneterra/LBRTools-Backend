@@ -1,8 +1,10 @@
 import { container } from 'tsyringe'
 
-// import {} from '../repositories'
-// import {} from '../typeorm/repositories'
+import IUsersRepository from '../repositories/IUsersRepository'
+import UsersRepository from '../typeorm/repositories/UsersRepository'
 
-//export enum RepositoriosInjetaveis {}
+export enum InjectableRepositories {
+  USERS = 'USERS'
+}
 
-// container.registerSingleton<IRepositorio>(RepositoriosInjetaveis.REPOSITORIO, RepositorioTypeorm)
+container.registerSingleton<IUsersRepository>(InjectableRepositories.USERS, UsersRepository)
