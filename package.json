@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -n",
+    "migration:run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run",
     "dev": "ts-node-dev --respawn --ignore-watch node_modules src/server.ts",
     "start": "ts-node-dev --respawn --ignore-watch node_modules src/server.ts",
     "prebuild": "rimraf dist/*",
@@ -56,7 +58,6 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^4.1.1",
-    "oracledb": "^5.0.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.3.0",

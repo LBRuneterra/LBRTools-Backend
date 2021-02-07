@@ -8,8 +8,8 @@ services:
     image: postgres:12
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASS}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
     ports:
       - '5432:5432'
     networks:
@@ -30,5 +30,6 @@ services:
       - db
     environment:
       - NODE_ENV=development
+      - DB_HOST=db
     networks:
       - database
