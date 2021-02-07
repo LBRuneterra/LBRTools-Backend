@@ -1,6 +1,7 @@
 import express from 'express'
 import 'express-async-errors'
 import { createConnection } from 'typeorm'
+import 'reflect-metadata'
 import cors from 'cors'
 import helmet from 'helmet'
 
@@ -30,16 +31,14 @@ class App {
     this.express.use(helmet())
   }
 
-  private environment(): void {
-    
-  }
+  private environment(): void {}
 
   private async database(): Promise<void> {
-    // try {
-    //   await createConnection()
-    // } catch (err) {
-    //   console.debug(err.stack)
-    // }
+    try {
+      await createConnection()
+    } catch (err) {
+      console.debug(err.stack)
+    }
   }
 
   private routes(): void {

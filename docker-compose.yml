@@ -1,20 +1,22 @@
 version: '3'
+volumes:
+  postgres_data:
 networks:
   database:
-  queue:
 services:
   db:
     image: postgres:12
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
-    volumes:
-      - ./src/db/scripts:/scripts
-      - ./src/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - '5432:5432'
     networks:
       - database
+    volumes:
+      - ./src/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data/
   app:
     image: node:14
     working_dir: /usr/app
@@ -30,4 +32,3 @@ services:
       - NODE_ENV=development
     networks:
       - database
-      - queue
