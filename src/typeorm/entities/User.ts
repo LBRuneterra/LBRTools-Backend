@@ -1,20 +1,28 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany
+} from 'typeorm'
 
 import { UserType, IUser } from '../../models/IUser'
+import Decks from './Decks'
 
 @Entity('users')
 export default class User implements IUser {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ nullable: false })
   name: string
 
   @Column()
   password?: string
 
-  @Column({ unique: true })
-  email: string
+  @Column({ nullable: false })
+  tag: string
 
   @Column('enum', { enum: UserType, default: UserType.PLAYER })
   type: UserType
@@ -25,5 +33,6 @@ export default class User implements IUser {
   @UpdateDateColumn()
   updated_at: Date
 
-  //Should have decks array here
+  @OneToMany((type) => Decks, (decks) => decks.user)
+  decks: Decks[]
 }

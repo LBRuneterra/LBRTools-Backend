@@ -14,7 +14,7 @@ export interface IUser {
   id: number
   name: string
   password?: string
-  email: string
+  tag: string
   type: UserType
   created_at: Date
   updated_at: Date

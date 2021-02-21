@@ -1,7 +1,8 @@
 import { IUser, UserType } from '../models/IUser'
 import { hash } from 'bcryptjs'
 import IUsersRepository from '../repositories/IUsersRepository'
-import { inject } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
+import { InjectableRepositories } from '../config/injectContainer'
 
 interface CreateUserRequest {
   name: string
@@ -10,9 +11,10 @@ interface CreateUserRequest {
   type: UserType
 }
 
+@injectable()
 class CreateUserService {
   constructor(
-    @inject('UsersRepository')
+    @inject(InjectableRepositories.USERS)
     private usersRepository: IUsersRepository
   ) {}
 

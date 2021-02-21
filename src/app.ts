@@ -4,6 +4,7 @@ import { createConnection } from 'typeorm'
 import 'reflect-metadata'
 import cors from 'cors'
 import helmet from 'helmet'
+import dotenv from 'dotenv'
 
 import './config/injectContainer'
 
@@ -11,6 +12,8 @@ import 'reflect-metadata'
 
 import routes from './routes'
 import errorHandling from './middlewares/errorHandling'
+
+dotenv.config()
 
 class App {
   public express: express.Application

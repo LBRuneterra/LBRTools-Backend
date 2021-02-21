@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import CreateUserService from '../services/CreateUserService'
+import UploadUsersDecksService from '../services/UploadUsersDecksService'
 
 export default class UsersController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -16,5 +17,12 @@ export default class UsersController {
     })
 
     return res.json(user)
+  }
+
+  public async upload(req: Request, res: Response): Promise<Response> {
+    const updateUserAvatar = container.resolve(UploadUsersDecksService)
+    const players = await updateUserAvatar.execute(req.file.filename)
+
+    return res.json(players)
   }
 }
