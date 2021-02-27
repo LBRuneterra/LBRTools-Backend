@@ -1,3 +1,5 @@
+import { IDecks } from './IDecks'
+
 export enum UserType {
   ADMIN = 'admin',
   PLAYER = 'player'
@@ -6,7 +8,7 @@ export enum UserType {
 export interface INewUser {
   name: string
   password?: string
-  email: string
+  tag: string
   type: UserType
 }
 
@@ -16,7 +18,7 @@ export interface IUser {
   password?: string
   tag: string
   type: UserType
+  decks: IDecks[]
   created_at: Date
   updated_at: Date
-  //Should have decks array here
 }

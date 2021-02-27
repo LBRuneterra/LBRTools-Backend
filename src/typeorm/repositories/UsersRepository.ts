@@ -10,15 +10,23 @@ export default class UsersRepository implements IUsersRepository {
     this.usersRepository = getRepository(User)
   }
 
-  findById(id: string): Promise<IUser | undefined> {
-    throw new Error('Method not implemented.')
+  async findById(id: string): Promise<User | undefined> {
+    const user = await this.usersRepository.findOne(id)
+    if (user) {
+      delete user.password
+    }
+    return user
   }
 
-  async findByEmail(email: string): Promise<IUser | undefined> {
-    return await this.usersRepository.findOne({ where: { email } })
+  async findByNameTag(name: string, tag: string): Promise<User | undefined> {
+    const user = await this.usersRepository.findOne({ where: { name, tag }, relations: ['decks'] })
+    if (user) {
+      delete user.password
+    }
+    return user
   }
 
-  async create(data: INewUser): Promise<IUser> {
+  async create(data: INewUser): Promise<User> {
     const user = this.usersRepository.create(data)
     await this.usersRepository.save(user)
     delete user.password

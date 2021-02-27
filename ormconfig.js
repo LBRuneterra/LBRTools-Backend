@@ -17,6 +17,6 @@ module.exports = {
     process.env.NODE_ENV === 'development'
       ? ['src/typeorm/entities/**/*.ts']
       : ['./typeorm/entities/**/*.js'],
-  synchronize: false
+  synchronize: false,
   // logging: true
 }

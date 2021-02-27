@@ -4,7 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne,
+  JoinColumn
 } from 'typeorm'
 
 import { IDecks } from '../../models/IDecks'
@@ -14,12 +15,6 @@ import User from './User'
 export default class Decks implements IDecks {
   @PrimaryGeneratedColumn()
   id: number
-
-  @Column()
-  name: string
-
-  @Column()
-  tag: string
 
   //This is a string with multiple decks separated by ';'
   @Column()
@@ -32,5 +27,6 @@ export default class Decks implements IDecks {
   updated_at: Date
 
   @ManyToOne((type) => User, (user) => user.decks)
+  @JoinColumn({ name: 'user_id' })
   user: User
 }
