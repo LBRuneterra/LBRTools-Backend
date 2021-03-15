@@ -16,7 +16,7 @@ services:
       - database
     volumes:
       - ./src/db/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - postgres_data:/var/lib/postgresql/data/
+      - ./postgres_data:/var/lib/postgresql/data/
   app:
     image: node:14
     working_dir: /usr/app

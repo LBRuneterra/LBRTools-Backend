@@ -4,11 +4,14 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
+  JoinColumn,
+  ManyToOne
 } from 'typeorm'
 
 import { UserType, IUser } from '../../models/IUser'
 import Decks from './Decks'
+import Team from './Team'
 
 @Entity('users')
 export default class User implements IUser {
@@ -35,4 +38,8 @@ export default class User implements IUser {
 
   @OneToMany((type) => Decks, (decks) => decks.user)
   decks: Decks[]
+
+  @ManyToOne((type) => Team, (team) => team.players)
+  @JoinColumn({ name: 'team_id' })
+  team: Team
 }

@@ -20,8 +20,8 @@ export default class UsersController {
   }
 
   public async upload(req: Request, res: Response): Promise<Response> {
-    const updateUserAvatar = container.resolve(UploadUsersDecksService)
-    const players = await updateUserAvatar.execute(req.file.filename)
+    const uploadCsv = container.resolve(UploadUsersDecksService)
+    const players = await uploadCsv.execute(req.file.filename)
 
     return res.json(players)
   }

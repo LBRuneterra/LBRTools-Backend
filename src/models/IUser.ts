@@ -1,4 +1,5 @@
 import { IDecks } from './IDecks'
+import { ITeam } from './ITeam'
 
 export enum UserType {
   ADMIN = 'admin',
@@ -10,6 +11,7 @@ export interface INewUser {
   password?: string
   tag: string
   type: UserType
+  team: ITeam
 }
 
 export interface IUser {
@@ -19,6 +21,7 @@ export interface IUser {
   tag: string
   type: UserType
   decks: IDecks[]
+  team: ITeam
   created_at: Date
   updated_at: Date
 }
